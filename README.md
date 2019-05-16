@@ -8,3 +8,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 heroku buildpacks:set https://github.com/heroku/heroku-buildpack-nodejs#v83
 heroku buildpacks:add --index 2 https://github.com/heroku/heroku-buildpack-static.git
 ```
+
+## Demo login
+
+username: demo
+password: demo
