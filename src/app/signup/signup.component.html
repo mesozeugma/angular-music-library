@@ -1,0 +1,95 @@
+<section class="signup-form">
+  <form
+    fxLayout="column"
+    fxLayoutAttribute="center center"
+    [formGroup]="signupForm"
+    (ngSubmit)="signup(signupForm)"
+  >
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Funkwhale Server"
+        required
+        formControlName="funkwhaleServer"
+        name="funkwhaleServer"
+      />
+      <mat-error *ngIf="hasError('funkwhaleServer', 'required')"
+        >Funkwhale Server is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Username"
+        required
+        formControlName="username"
+        name="username"
+      />
+      <mat-error *ngIf="hasError('username', 'required')"
+        >Username is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="Email"
+        required
+        formControlName="email"
+        name="email"
+      />
+      <mat-error *ngIf="hasError('email', 'required')"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="hasError('email', 'email')"
+        >Email must be in valid format</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        placeholder="Password"
+        required
+        formControlName="password1"
+        name="password1"
+      />
+      <mat-error *ngIf="hasError('password1', 'required')"
+        >Password is required</mat-error
+      >
+      <mat-error *ngIf="hasError('password1', 'minlength')"
+        >Password must be a minimum of 6 characters</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        placeholder="Password Confirmation"
+        required
+        formControlName="password2"
+        [errorStateMatcher]="errorMatcher"
+        name="password2"
+      />
+      <mat-error *ngIf="hasError('password2', 'required')"
+        >Password Confirmation is required</mat-error
+      >
+      <mat-error *ngIf="signupForm.errors?.passwordMismatch"
+        >Passwords must match</mat-error
+      >
+    </mat-form-field>
+    <div [hidden]="!error" style="color:red">
+      Failed to register. Is registration enabled on the server?
+    </div>
+    <button
+      mat-raised-button
+      type="submit"
+      [disabled]="!signupForm.valid"
+      color="primary"
+    >
+      Sign up
+    </button>
+  </form>
+</section>

@@ -1,0 +1,45 @@
+<div *ngIf="track$ | async; let track; else: loading">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="c-title">{{ track.title }}</mat-card-title>
+      <mat-card-subtitle class="c-subtitle"
+        >{{ track.artist.name }} ({{ track.album.title }})</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <div
+        fxLayout="row wrap"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="32px"
+        fxLayoutAlign="flex-start"
+      >
+        <ng-container *ngFor="let audioFile of track.uploads">
+          <mat-card
+            fxFlex="0 1 calc(33.3% - 32px)"
+            fxFlex.lt-md="0 1 calc(50% - 32px)"
+            fxFlex.lt-sm="100%"
+          >
+            <mat-card-header>
+              <mat-card-title>{{
+                printLength(audioFile.duration)
+              }}</mat-card-title>
+              <mat-card-subtitle>{{ audioFile.extension }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <audio controls>
+                <source
+                  [src]="getListenUrl(audioFile.listen_url)"
+                  [type]="audioFile.mimetype"
+                />
+              </audio>
+            </mat-card-content>
+          </mat-card>
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

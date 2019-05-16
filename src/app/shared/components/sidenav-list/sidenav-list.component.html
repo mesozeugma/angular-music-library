@@ -1,0 +1,22 @@
+<mat-nav-list>
+  <ng-container *ngIf="isUser(); else guest">
+    <a mat-list-item routerLink="/tracks">
+      <mat-icon>view_list</mat-icon>
+      <span class="nav-caption">Tracks</span>
+    </a>
+    <a mat-list-item routerLink="" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span class="nav-caption">Logout</span>
+    </a>
+  </ng-container>
+  <ng-template #guest>
+    <a mat-list-item routerLink="/signup">
+      <mat-icon>person_add</mat-icon>
+      <span class="nav-caption">Sign up</span>
+    </a>
+    <a mat-list-item routerLink="/login">
+      <mat-icon>account_circle</mat-icon>
+      <span class="nav-caption">Login</span>
+    </a>
+  </ng-template>
+</mat-nav-list>
